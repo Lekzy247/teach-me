@@ -13,15 +13,22 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+
       - name: Validate JavaScript syntax
         run: |
           node --check server.mjs
           node --check public/app.js
+          node --check public/demo-fallback.js
+          node --check public/json-safe.js
           node --check test.mjs
+
       - name: Run smoke tests
+        env:
+          USE_SUPABASE: "false"
+          SESSION_SECRET: ci-test-secret
         run: npm test
