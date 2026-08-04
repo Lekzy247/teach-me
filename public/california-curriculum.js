@@ -6,7 +6,27 @@
 
   function renderQuestions(items){
     if(!items.length)return '<div class="ca-preview-empty">Choose a grade and subject, then select Preview Questions.</div>';
-    return `<div class="ca-preview-list">${items.map((item,index)=>`<article class="ca-preview-item"><header><b>${index+1}. ${item.standard}</b><span class="badge">${item.skill}</span></header><div>${item.prompt}</div><ol type="A">${item.options.map(option=>`<li>${option}</li>`).join('')}</ol></article>`).join('')}</div>`;
+    return `<div class="ca-preview-list">${items.map((item,index)=>`
+      <article class="ca-preview-item">
+        <header>
+          <b>${index+1}. ${item.standard}</b>
+          <span class="badge">${item.skill}</span>
+        </header>
+        <div class="ca-preview-meta">
+          <span>${item.difficulty||'Practice'}</span>
+          <span>DOK ${item.dok||1}</span>
+          <span>${item.estimatedSeconds||180} sec</span>
+        </div>
+        <h4>${item.prompt}</h4>
+        <ol type="A">${item.options.map((option,optionIndex)=>`<li class="${optionIndex===item.correctIndex?'ca-correct-option':''}">${option}</li>`).join('')}</ol>
+        <details>
+          <summary>Instructional details</summary>
+          <p><b>Hint:</b> ${item.hint||'Guide the student to identify the key information.'}</p>
+          <p><b>Explanation:</b> ${item.explanation||`The correct answer is ${item.options[item.correctIndex]}.`}</p>
+          <p><b>Teacher note:</b> ${item.teacherNote||`Use this item to assess ${item.standard}.`}</p>
+          <p><b>Common misconception:</b> ${item.commonMisconception||'The student may select an answer without applying the complete skill.'}</p>
+        </details>
+      </article>`).join('')}</div>`;
   }
 
   function enhance(){
@@ -22,7 +42,7 @@
     section.innerHTML=`
       <span class="badge">California Standards</span>
       <h3>Curriculum Question Builder</h3>
-      <p>Create an original 20-question set aligned to California standards.</p>
+      <p>Create and review an original 20-question set aligned to California standards.</p>
       <div class="ca-curriculum-controls">
         <div><label>Grade</label><select data-grade>${grades.map(g=>`<option>${g}</option>`).join('')}</select></div>
         <div><label>Subject</label><select data-subject><option>Mathematics</option><option>Language Arts</option><option>Science</option></select></div>
