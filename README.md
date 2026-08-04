@@ -1,6 +1,12 @@
-# Teach Me V8
+# Teach Me V9
 
 Teach Me is a TK–12 learning platform for Mathematics, Language Arts, and Science. The current school-pilot build includes student, teacher, parent, and administrator experiences; timed practice; a digital show-your-work canvas; teacher grading; progress tracking; goals; portfolios; notifications; reports; and a safeguarded AI tutor.
+
+## Deployment status
+
+- Vercel deployment is enabled.
+- GitHub Actions validates JavaScript syntax and runs smoke tests on every push to `main`.
+- Static demo login fallback is available when a hosted API is unavailable.
 
 ## Run locally
 
