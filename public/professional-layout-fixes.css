@@ -1,4 +1,6 @@
 /* Full-page sign-in and professional homepage organization */
+html{scroll-behavior:smooth}
+body.tm-auth-open{overflow:hidden}
 .tm-public-home{overflow-x:hidden}
 .tm-public-home main{display:block}
 .tm-public-home .tm-site-nav,
