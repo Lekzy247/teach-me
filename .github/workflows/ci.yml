@@ -1,0 +1,27 @@
+name: Teach Me CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Validate JavaScript syntax
+        run: |
+          node --check server.mjs
+          node --check public/app.js
+          node --check test.mjs
+      - name: Run smoke tests
+        run: npm test
